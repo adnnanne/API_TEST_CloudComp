@@ -18,6 +18,7 @@ data "azurerm_cosmosdb_sql_database" "existing_database" {
   account_name        = data.azurerm_cosmosdb_account.existing_cosmosdb.name
 }
 
+
 resource "azurerm_service_plan" "appserviceplan" {
   name                = "${var.app_name}-asp"
   location            = data.azurerm_resource_group.existing_rg.location
@@ -36,7 +37,8 @@ resource "azurerm_app_service" "appservice" {
     "WEBSITE_RUN_FROM_PACKAGE" = "1"
     "COSMOSDB_ACCOUNT_NAME"    = data.azurerm_cosmosdb_account.existing_cosmosdb.name
     "COSMOSDB_DATABASE_NAME"   = data.azurerm_cosmosdb_sql_database.existing_database.name
-    "COSMOSDB_URI"             = data.azurerm_cosmosdb_account.existing_cosmosdb.endpoint
-    "COSMOSDB_PRIMARY_KEY"     = data.azurerm_cosmosdb_account.existing_cosmosdb.primary_key
+    "COSMOSDB_CONTAINER_NAME"   = var.cosmosdb_container_name
+    "COSMOSDB_URI"             = "https://lec2dbcmdcosmosdbacc.documents.azure.com:443/"
+    "COSMOSDB_PRIMARY_KEY"     = "g7WYd2n4nbqMPWSDma6vsmcLkDqJ3svysFl3zrCFzsZ8obo3ebHSszp11r3s21jMcdUIxHt6j9XeACDbnd9mSA=="
   }
 }

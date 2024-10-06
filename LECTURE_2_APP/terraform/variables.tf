@@ -22,3 +22,8 @@ variable "cosmosdb_database_name" {
   description = "Existing Cosmos DB database name"
   default = "lec2dbcmdcosmosdbdatabase"
 }
+
+variable "cosmosdb_container_name" {
+  description = "Existing Cosmos DB container name"
+  default     = "lec2dbcmdcosmosdbcontainer"
+}
